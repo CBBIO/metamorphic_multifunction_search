@@ -1,6 +1,6 @@
 Accessions Module
 ====================
 
-.. automodule:: protein_metamorphisms_is.operation.extraction.accessions
+.. automodule:: metamorphic_multifunction_search.operation.extraction.accessions
     :members:
     :show-inheritance:

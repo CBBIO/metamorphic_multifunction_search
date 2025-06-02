@@ -4,19 +4,19 @@ import unittest
 import pytest
 from sqlalchemy.dialects.mssql.information_schema import sequences
 
-from protein_metamorphisms_is.helpers.config.yaml import read_yaml_config
-from protein_metamorphisms_is.operation.clustering.sequence_clustering import SequenceClustering
-from protein_metamorphisms_is.operation.embedding.sequence_embedding import SequenceEmbeddingManager
-from protein_metamorphisms_is.operation.extraction.uniprot import UniProtExtractor
-from protein_metamorphisms_is.sql.model.entities.embedding.sequence_embedding import SequenceEmbedding, \
+from metamorphic_multifunction_search.helpers.config.yaml import read_yaml_config
+from metamorphic_multifunction_search.operation.clustering.sequence_clustering import SequenceClustering
+from metamorphic_multifunction_search.operation.embedding.sequence_embedding import SequenceEmbeddingManager
+from metamorphic_multifunction_search.operation.extraction.uniprot import UniProtExtractor
+from metamorphic_multifunction_search.sql.model.entities.embedding.sequence_embedding import SequenceEmbedding, \
     SequenceEmbeddingType
-from protein_metamorphisms_is.sql.model.entities.go_annotation.go_annotation import ProteinGOTermAnnotation
-from protein_metamorphisms_is.sql.model.entities.go_annotation.go_term import GOTerm
-from protein_metamorphisms_is.sql.model.entities.protein.accesion import Accession
-from protein_metamorphisms_is.sql.model.entities.protein.protein import Protein
-from protein_metamorphisms_is.sql.model.entities.sequence.sequence import Sequence
-from protein_metamorphisms_is.sql.model.entities.structure.structure import Structure
-from protein_metamorphisms_is.sql.model.operational.clustering.cluster import ClusterEntry, Cluster
+from metamorphic_multifunction_search.sql.model.entities.go_annotation.go_annotation import ProteinGOTermAnnotation
+from metamorphic_multifunction_search.sql.model.entities.go_annotation.go_term import GOTerm
+from metamorphic_multifunction_search.sql.model.entities.protein.accesion import Accession
+from metamorphic_multifunction_search.sql.model.entities.protein.protein import Protein
+from metamorphic_multifunction_search.sql.model.entities.sequence.sequence import Sequence
+from metamorphic_multifunction_search.sql.model.entities.structure.structure import Structure
+from metamorphic_multifunction_search.sql.model.operational.clustering.cluster import ClusterEntry, Cluster
 
 
 @pytest.mark.order(7)

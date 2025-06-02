@@ -1,6 +1,6 @@
 Sequence Clustering Module
 ================================
 
-.. automodule:: protein_metamorphisms_is.operation.clustering.sequence_clustering
+.. automodule:: metamorphic_multifunction_search.operation.clustering.sequence_clustering
     :members:
     :show-inheritance:

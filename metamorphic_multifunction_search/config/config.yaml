@@ -1,0 +1,119 @@
+# ==============================
+# 🌍 Global System Configuration
+# ==============================
+
+# Maximum number of worker threads for parallel processing.
+max_workers: 10
+
+# Path to binary files for alignment algorithms.
+binaries_path: '../binaries'
+
+# Monitoring interval in seconds (for processes that require periodic checks).
+monitor_interval: 10 # ⚠️ IMPORTANT: Low values as 1 can cause execution problems.
+
+# Path to save logs, set False to disable the option
+log_path: '~/data/logs/'
+
+# ======================================
+# 🗄️ Database Configuration (PostgreSQL)
+# ======================================
+
+# Credentials and configuration for connecting to the PostgreSQL database.
+DB_USERNAME: usuario         # Database username.
+DB_PASSWORD: clave           # Database password.
+DB_HOST: localhost           # Host where the database server is running.
+DB_PORT: 5432                # Port used for the database connection.
+DB_NAME: BioData             # Name of the database to use.
+
+
+# =========================================
+# 📨 Message Queue Configuration (RabbitMQ)
+# =========================================
+
+# Configuration for the RabbitMQ message broker.
+rabbitmq_host: localhost     # RabbitMQ server hostname.
+rabbitmq_port: 5672         # RabbitMQ server port.
+rabbitmq_port_http: 15672         # RabbitMQ server port.
+rabbitmq_user: guest         # RabbitMQ username for authentication.
+rabbitmq_password: guest     # RabbitMQ password for authentication.
+
+
+# ==========================
+# 🏃 Execution Configuration
+# ==========================
+
+# Maximum number of items to process (for debugging).
+limit_execution: 50 # False for complete run.
+
+# Reset queues with each execution.
+delete_queues: True
+
+
+# ===================================
+# 📜 Information System Configuration
+# ===================================
+
+# Number of results to fetch from UniProt (pagination).
+limit: 200
+
+
+
+# Local path where the files will be stored.
+data_directory: "~/data"
+
+# File extension
+file_format: "mmCif"
+
+
+# ===========================
+# 🚀 Operations Configuration
+# ===========================
+
+# Path to the constants configuration file.
+constants: "config/constants.yaml"
+
+# 🌳 Sequence Clustering
+## Temporal files that will be created, check that the directories path exists
+fasta_path: "~/data/complete.fasta"
+cdhit_out_path: "~/data/cd_hitout"
+
+## Sequence Clustering
+# Identity threshold for sequence clustering
+sequence_identity_threshold: 0.7
+
+# Minimum alignment coverage for sequence clustering
+alignment_coverage: 0
+
+## Structural Subclustering
+# Identity threshold for structural subclustering
+structural_identity_threshold: 0.65
+
+# Minimum alignment coverage for structural subclustering
+structural_alignment_coverage: 0
+
+#Maximum memory usage for CD-HIT
+memory_usage: 25000
+
+#Boolean value to enable/disable most representative search
+most_representative_search: 1
+
+# 🔧 Structural Alignment
+structural_alignment:
+  types:
+    - 1
+    - 2
+    - 3
+
+  retry_timeout: 1
+  retry_count: 5
+  batch_size: 1
+  task_timeout: 20
+
+# 🧠 GO Metrics
+#Paths to OBO and GAF files.
+obo: '../data/go-basic.obo'
+
+go_annotation_file: '../data/cgd.gaf'
+
+
+k: 5

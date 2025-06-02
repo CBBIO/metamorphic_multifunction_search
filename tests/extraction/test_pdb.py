@@ -3,14 +3,14 @@ import unittest
 
 import pytest
 
-from protein_metamorphisms_is.helpers.config.yaml import read_yaml_config
-from protein_metamorphisms_is.operation.extraction.pdb import PDBExtractor
-from protein_metamorphisms_is.sql.model.entities.protein.accesion import Accession
-from protein_metamorphisms_is.sql.model.entities.protein.protein import Protein
-from protein_metamorphisms_is.sql.model.entities.sequence.sequence import Sequence
-from protein_metamorphisms_is.sql.model.entities.structure.structure import Structure
-from protein_metamorphisms_is.sql.model.entities.structure.chain import Chain
-from protein_metamorphisms_is.sql.model.entities.structure.state import State
+from metamorphic_multifunction_search.helpers.config.yaml import read_yaml_config
+from metamorphic_multifunction_search.operation.extraction.pdb import PDBExtractor
+from metamorphic_multifunction_search.sql.model.entities.protein.accesion import Accession
+from metamorphic_multifunction_search.sql.model.entities.protein.protein import Protein
+from metamorphic_multifunction_search.sql.model.entities.sequence.sequence import Sequence
+from metamorphic_multifunction_search.sql.model.entities.structure.structure import Structure
+from metamorphic_multifunction_search.sql.model.entities.structure.chain import Chain
+from metamorphic_multifunction_search.sql.model.entities.structure.state import State
 
 @pytest.mark.order(3)
 class TestPDBExtractor(unittest.TestCase):

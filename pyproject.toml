@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "protein_metamorphisms_is"
+name = "metamorphic_multifunction_search"
 version = "4.2.0"
 description = "Comprehensive Python Module for Protein Data Management: Designed for streamlined integration and processing of protein information from both UniProt and PDB. Equipped with features for concurrent data fetching, robust error handling, and database synchronization."
 authors = ["frapercan <frapercan1@alum.us.es>"]
@@ -39,6 +39,8 @@ pandas = "^2.2.3"
 zstd = "1.5.6.1"
 sphinx-copybutton = "^0.5.2"
 django = "^5.1.7"
+protein-metamorphisms-is = "^4.2.0"
+
 
 
 
@@ -63,9 +65,9 @@ sphinx-copybutton = "^0.5.2"
 
 [tool.taskipy.tasks]
 html_docs = "make html -C docs"
-lint = "poetry run flake8 protein_metamorphisms_is"
+lint = "poetry run flake8 metamorphic_multifunction_search"
 autopep = "autopep8 --in-place --recursive . --max-line-length=79"
-coverage = "poetry run coverage run -m --source=protein_metamorphisms_is pytest tests && poetry run coverage report -m"
+coverage = "poetry run coverage run -m --source=metamorphic_multifunction_search pytest tests && poetry run coverage report -m"
 
 
 

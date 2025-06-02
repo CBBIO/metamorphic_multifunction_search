@@ -1,59 +1,56 @@
-[![PyPI - Version](https://img.shields.io/pypi/v/protein-metamorphisms-is)](https://pypi.org/project/protein-metamorphisms-is/)
-[![Documentation Status](https://readthedocs.org/projects/protein-metamorphisms-is/badge/?version=latest)](https://protein-metamorphisms-is.readthedocs.io/en/latest/?badge=latest)
-![Linting Status](https://github.com/CBBIO/protein-metamorphisms-is/actions/workflows/test-lint.yml/badge.svg?branch=main)
+[![PyPI - Version](https://img.shields.io/pypi/v/metamorphic_multifunction_search)](https://pypi.org/project/metamorphic_multifunction_search/)
+[![Documentation Status](https://readthedocs.org/metamorphic_multifunction_search/badge/?version=latest)](https://metamorphic_multifunction_search.readthedocs.io/en/latest/?badge=latest)
+![Linting Status](https://github.com/CBBIO/metamorphic_multifunction_search/actions/workflows/test-lint.yml/badge.svg?branch=main)
 
-# **Protein Information System (PIS)**
+# **Metamorphic & Multifunctional Protein Search**
 
-**Protein Information System (PIS)** is an integrated biological information system focused on extracting, processing, and managing protein-related data. PIS consolidates data from **UniProt**, **PDB**, and **GOA**, enabling the efficient retrieval and organization of protein sequences, structures, and functional annotations.
+## 🔬 Overview
 
-The primary goal of PIS is to provide a robust framework for large-scale protein data extraction, facilitating downstream functional analysis and annotation transfer. The system is designed for **high-performance computing (HPC) environments**, ensuring scalability and efficiency.
+**`metamorphic_multifunction_search`** is a systematic protocol for the **large-scale detection of structural metamorphisms and protein multifunctionality**, built on top of the Protein Information System (PIS).
 
-## 📈 **Current State of the Project**
-
-### **FANTASIA Redesign**
-> 🔄 **FANTASIA has been completely redesigned and is now available at:**  
-> [**FANTASIA Repository**](https://github.com/CBBIO/FANTASIA)  
-> This new version is a pipeline for **annotating GO (Gene Ontology) terms** in protein sequence files (FASTAs). The redesign focuses on long-term support, updated dependencies, and improved integration with High-Performance Computing (HPC) environments.  
-
-### **Stable Version of the Information System**
-> 🛠️ **A stable version of the information system for working with UniProt and annotation transfer is available at:**  
-> [**Zenodo Stable Release**](https://zenodo.org/records/15095845)  
-> This version serves as a reference implementation and provides a consistent environment for annotation transfer tasks.
-
-## **Prerequisites**
-
-- Python 3.11.6
-- RabbitMQ
-- PostgreSQL with pgVector extension installed.
+The project combines structural alignments, functional GO annotations, and protein language models to uncover hidden relationships between structure and function across model and non-model organisms.
 
 ---
 
-## **Setup Instructions**
+## 🧠 What Does This Protocol Do?
 
-### 1. Install Docker
-Ensure Docker is installed on your system. If it’s not, you can download it from [here](https://docs.docker.com/get-docker/).
+### 1. **Structural Metamorphism Detection**
 
-### 2. Starting Required Services
+* Aligns 3D protein structures with high sequence identity.
+* Detects divergent conformations (i.e. metamorphisms) using metrics like RMSD or FC-score.
+* Uses large-scale filtering (e.g., CD-HIT) and pairwise structural comparison.
 
-Ensure PostgreSQL and RabbitMQ services are running.
+### 2. **Functional Multifunctionality Analysis**
+
+* Extracts Gene Ontology (GO) annotations per protein.
+* Computes semantic distances between GO terms within each namespace (MF, BP, CC).
+* Identifies the most divergent pair of terms per protein to quantify multifunctionality.
+
+---
+
+## ⚙️ Requirements
+
+* Python 3.11.6
+* RabbitMQ
+* PostgreSQL with `pgvector` extension
+* Docker (optional but recommended for deployment)
+
+---
+
+## 🚀 Quick Start
+
+1. **Start PostgreSQL with `pgvector`:**
 
 ```bash
 docker run -d --name pgvectorsql \
-    -e POSTGRES_USER=usuario \
-    -e POSTGRES_PASSWORD=clave \
+    -e POSTGRES_USER=user \
+    -e POSTGRES_PASSWORD=password \
     -e POSTGRES_DB=BioData \
     -p 5432:5432 \
-    pgvector/pgvector:pg16 
-
+    pgvector/pgvector:pg16
 ```
 
-### 4. (Optional) Connect to the Database
-
-You can use **pgAdmin 4**, a graphical interface for managing and interacting with PostgreSQL databases, or any other SQL client.
-
-### 5. Set Up RabbitMQ
-
-Start a RabbitMQ container using the command below:
+2. **Start RabbitMQ:**
 
 ```bash
 docker run -d --name rabbitmq \
@@ -62,23 +59,31 @@ docker run -d --name rabbitmq \
     rabbitmq:management
 ```
 
-### 6. (Optional) Manage RabbitMQ
-
-Once RabbitMQ is running, you can access its management interface at [RabbitMQ Management Interface](http://localhost:15672/#/queues).
-
----
-
-## **Get started:**
-
-To execute the full extraction process, simply run:
+3. **Run the main protocol:**
 
 ```bash
 python main.py
 ```
 
-This command will trigger the complete workflow, starting from the initial data preprocessing stages and continuing through to the final data organization and storage.
+This command executes the full pipeline: data extraction, structural filtering, alignment, functional analysis, and metric computation.
 
-## **Customizing the Workflow:**
+---
 
-You can customize the sequence of tasks executed by modifying `main.py` or adjusting the relevant parameters in the `config.yaml` file. This allows you to tailor the extraction process to meet specific research needs or to experiment with different data processing configurations.
+## ⚒️ Customization
 
+You can tailor the pipeline by editing the `config.yaml` file or modifying `main.py` to:
+
+* Switch embedding models
+* Apply taxonomy-based filters
+* Add new annotation types or similarity metrics
+
+---
+
+## 📚 Related Projects
+
+* 🔗 [Protein Information System (PIS)](https://github.com/CBBIO/ProteinInformationSystem)
+* 🔗 [FANTASIA: Functional Annotation Toolkit](https://github.com/CBBIO/FANTASIA)
+
+---
+
+Let me know if you'd like me to overwrite your current `README.md` with this version.
