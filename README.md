@@ -83,7 +83,3 @@ You can tailor the pipeline by editing the `config.yaml` file or modifying `main
 
 * 🔗 [Protein Information System (PIS)](https://github.com/CBBIO/ProteinInformationSystem)
 * 🔗 [FANTASIA: Functional Annotation Toolkit](https://github.com/CBBIO/FANTASIA)
-
----
-
-Let me know if you'd like me to overwrite your current `README.md` with this version.
