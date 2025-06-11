@@ -6,12 +6,12 @@ from goatools.godag.go_tasks import get_go2ancestors
 
 
 from goatools.anno.gaf_reader import GafReader
-from protein_metamorphisms_is.sql.model.entities.go_annotation.go_annotation import ProteinGOTermAnnotation
-from protein_metamorphisms_is.sql.model.entities.go_annotation.go_term import GOTerm
-from protein_metamorphisms_is.sql.model.operational.functional.group import GOTermPair, GOTermPairEntry, \
+from protein_information_system.sql.model.entities.go_annotation.go_annotation import ProteinGOTermAnnotation
+from protein_information_system.sql.model.entities.go_annotation.go_term import GOTerm
+from protein_information_system.sql.model.operational.functional.group import GOTermPair, GOTermPairEntry, \
     GOTermPairProtein
-from protein_metamorphisms_is.sql.model.operational.functional.result import GOTermPairResult
-from protein_metamorphisms_is.tasks.queue import QueueTaskInitializer
+from protein_information_system.sql.model.operational.functional.result import GOTermPairResult
+from protein_information_system.tasks.queue import QueueTaskInitializer
 
 
 class GoMultifunctionalityMetrics(QueueTaskInitializer):

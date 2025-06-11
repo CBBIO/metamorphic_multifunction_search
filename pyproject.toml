@@ -39,7 +39,7 @@ pandas = "^2.2.3"
 zstd = "1.5.6.1"
 sphinx-copybutton = "^0.5.2"
 django = "^5.1.7"
-protein-metamorphisms-is = "^4.2.0"
+protein-information-system = "^1.0.0"
 
 
 

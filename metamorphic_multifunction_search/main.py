@@ -1,8 +1,8 @@
 import logging
-from protein_metamorphisms_is.helpers.config.yaml import read_yaml_config
-import protein_metamorphisms_is.sql.model.model  # noqa: F401
-from protein_metamorphisms_is.helpers.services.services import check_services
-from protein_metamorphisms_is.sql.base.database_manager import DatabaseManager
+from protein_information_system.helpers.config.yaml import read_yaml_config
+import protein_information_system.sql.model.model  # noqa: F401
+from protein_information_system.helpers.services.services import check_services
+from protein_information_system.sql.base.database_manager import DatabaseManager
 
 
 def main(config_path='config/config.yaml'):
@@ -32,7 +32,7 @@ def main(config_path='config/config.yaml'):
     SequenceClustering(conf).start()
     StructuralSubClustering(conf).start()
     StructuralAlignmentManager(conf).start()
-    GoMultifunctionalityMetrics(conf).start()
+    # GoMultifunctionalityMetrics(conf).start()
 
 if __name__ == '__main__':
     main()

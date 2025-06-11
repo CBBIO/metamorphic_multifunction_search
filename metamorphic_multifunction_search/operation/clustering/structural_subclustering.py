@@ -1,11 +1,11 @@
-from protein_metamorphisms_is.helpers.clustering.cdhit import calculate_cdhit_word_length
-from protein_metamorphisms_is.sql.model.entities.embedding.structure_3di import Structure3Di
-from protein_metamorphisms_is.sql.model.entities.sequence.sequence import Sequence
-from protein_metamorphisms_is.sql.model.entities.structure.chain import Chain
-from protein_metamorphisms_is.sql.model.entities.structure.state import State
-from protein_metamorphisms_is.sql.model.operational.clustering.cluster import Cluster, ClusterEntry, Subcluster, \
+from protein_information_system.helpers.clustering.cdhit import calculate_cdhit_word_length
+from protein_information_system.sql.model.entities.embedding.structure_3di import Structure3Di
+from protein_information_system.sql.model.entities.sequence.sequence import Sequence
+from protein_information_system.sql.model.entities.structure.chain import Chain
+from protein_information_system.sql.model.entities.structure.state import State
+from protein_information_system.sql.model.operational.clustering.cluster import Cluster, ClusterEntry, Subcluster, \
     SubclusterEntry
-from protein_metamorphisms_is.tasks.base import BaseTaskInitializer
+from protein_information_system.tasks.base import BaseTaskInitializer
 from pycdhit import cd_hit, read_clstr
 import os
 

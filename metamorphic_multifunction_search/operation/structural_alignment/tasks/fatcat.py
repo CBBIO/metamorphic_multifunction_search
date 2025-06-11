@@ -4,7 +4,7 @@ import subprocess
 import re
 import traceback
 
-from protein_metamorphisms_is.helpers.parser.parser import cif_to_pdb
+from protein_information_system.helpers.parser.parser import cif_to_pdb
 
 
 def align_task(alignment_entry, conf, logger):

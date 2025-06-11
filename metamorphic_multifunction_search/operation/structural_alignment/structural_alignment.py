@@ -1,15 +1,15 @@
 import importlib
 from itertools import combinations
 
-from protein_metamorphisms_is.sql.model.entities.embedding.structure_3di import Structure3Di
-from protein_metamorphisms_is.sql.model.entities.structure.state import State
-from protein_metamorphisms_is.sql.model.operational.clustering.cluster import SubclusterEntry, Subcluster
-from protein_metamorphisms_is.sql.model.operational.structural_alignment.group import AlignmentGroupEntry, \
+from protein_information_system.sql.model.entities.embedding.structure_3di import Structure3Di
+from protein_information_system.sql.model.entities.structure.state import State
+from protein_information_system.sql.model.operational.clustering.cluster import SubclusterEntry, Subcluster
+from protein_information_system.sql.model.operational.structural_alignment.group import AlignmentGroupEntry, \
     AlignmentGroup
-from protein_metamorphisms_is.sql.model.operational.structural_alignment.result import AlignmentResult
-from protein_metamorphisms_is.sql.model.operational.structural_alignment.structural_alignment_type import \
+from protein_information_system.sql.model.operational.structural_alignment.result import AlignmentResult
+from protein_information_system.sql.model.operational.structural_alignment.structural_alignment_type import \
     StructuralAlignmentType
-from protein_metamorphisms_is.tasks.queue import QueueTaskInitializer
+from protein_information_system.tasks.queue import QueueTaskInitializer
 from sqlalchemy import func
 from sqlalchemy.exc import SQLAlchemyError
 

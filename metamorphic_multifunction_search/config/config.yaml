@@ -79,10 +79,10 @@ cdhit_out_path: "~/data/cd_hitout"
 
 ## Sequence Clustering
 # Identity threshold for sequence clustering
-sequence_identity_threshold: 0.7
+sequence_identity_threshold: 0.98
 
 # Minimum alignment coverage for sequence clustering
-alignment_coverage: 0
+alignment_coverage: 0.95
 
 ## Structural Subclustering
 # Identity threshold for structural subclustering

@@ -1,9 +1,9 @@
 from sqlalchemy import text
 
-from metamorphic_multifunction_search.sql.model.entities.embedding.sequence_embedding import SequenceEmbedding
+from protein_information_system.sql.model.entities.embedding.sequence_embedding import SequenceEmbedding
 from metamorphic_multifunction_search.sql.model.entities.go_annotation.transference.sequence_go_term_annotation import \
     SequenceGoTermAnnotation
-from metamorphic_multifunction_search.tasks.queue import QueueTaskInitializer
+from protein_information_system.tasks.queue import QueueTaskInitializer
 
 
 class SequenceGOAnnotation(QueueTaskInitializer):

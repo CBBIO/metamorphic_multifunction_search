@@ -4,21 +4,21 @@ import unittest
 import pytest
 from sqlalchemy.dialects.mssql.information_schema import sequences
 
-from metamorphic_multifunction_search.helpers.config.yaml import read_yaml_config
+from protein_information_system.helpers.config.yaml import read_yaml_config
 from metamorphic_multifunction_search.operation.clustering.sequence_clustering import SequenceClustering
 from metamorphic_multifunction_search.operation.clustering.structural_subclustering import StructuralSubClustering
-from metamorphic_multifunction_search.operation.embedding.sequence_embedding import SequenceEmbeddingManager
-from metamorphic_multifunction_search.operation.extraction.uniprot import UniProtExtractor
-from metamorphic_multifunction_search.sql.model.entities.embedding.sequence_embedding import SequenceEmbedding, \
+from protein_information_system.operation.embedding.sequence_embedding import SequenceEmbeddingManager
+from protein_information_system.operation.extraction.uniprot import UniProtExtractor
+from protein_information_system.sql.model.entities.embedding.sequence_embedding import SequenceEmbedding, \
     SequenceEmbeddingType
-from metamorphic_multifunction_search.sql.model.entities.embedding.structure_3di import Structure3Di
-from metamorphic_multifunction_search.sql.model.entities.go_annotation.go_annotation import ProteinGOTermAnnotation
-from metamorphic_multifunction_search.sql.model.entities.go_annotation.go_term import GOTerm
-from metamorphic_multifunction_search.sql.model.entities.protein.accesion import Accession
-from metamorphic_multifunction_search.sql.model.entities.protein.protein import Protein
-from metamorphic_multifunction_search.sql.model.entities.sequence.sequence import Sequence
-from metamorphic_multifunction_search.sql.model.entities.structure.structure import Structure
-from metamorphic_multifunction_search.sql.model.operational.clustering.cluster import Cluster, Subcluster, SubclusterEntry
+from protein_information_system.sql.model.entities.embedding.structure_3di import Structure3Di
+from protein_information_system.sql.model.entities.go_annotation.go_annotation import ProteinGOTermAnnotation
+from protein_information_system.sql.model.entities.go_annotation.go_term import GOTerm
+from protein_information_system.sql.model.entities.protein.accesion import Accession
+from protein_information_system.sql.model.entities.protein.protein import Protein
+from protein_information_system.sql.model.entities.sequence.sequence import Sequence
+from protein_information_system.sql.model.entities.structure.structure import Structure
+from protein_information_system.sql.model.operational.clustering.cluster import Cluster, Subcluster, SubclusterEntry
 
 
 @pytest.mark.order(8)
