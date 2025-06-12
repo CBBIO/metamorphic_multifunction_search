@@ -214,6 +214,7 @@ class StructuralAlignmentManager(QueueTaskInitializer):
     def store_entry(self, entry: dict) -> None:
         """Store the alignment results in the database."""
         try:
+            inserted = 0
             for r in entry["results"]:
                 sub1_id = r["subcluster_entry_1_id"]
                 sub2_id = r["subcluster_entry_2_id"]
@@ -222,7 +223,11 @@ class StructuralAlignmentManager(QueueTaskInitializer):
                 sub1 = self.session.query(SubclusterEntry).get(sub1_id)
                 sub2 = self.session.query(SubclusterEntry).get(sub2_id)
 
-                # Recuperar o crear el alignment group
+                if not sub1 or not sub2:
+                    self.logger.error(f"Could not find subcluster entries {sub1_id} or {sub2_id}. Skipping.")
+                    continue
+
+                # Buscar si ya existe el grupo de alineamiento con exactamente esos dos entries
                 group = (
                     self.session.query(AlignmentGroup)
                     .join(AlignmentGroup.entries)
@@ -235,20 +240,17 @@ class StructuralAlignmentManager(QueueTaskInitializer):
                 )
 
                 if not group:
-                    group = AlignmentGroup(
-                        cluster_id=cluster_id,
-                    )
+                    group = AlignmentGroup()  # 🚫 cluster_id eliminado si no está en el modelo
                     self.session.add(group)
                     self.session.flush()
 
                     for s in [sub1, sub2]:
-                        entry = AlignmentGroupEntry(
+                        self.session.add(AlignmentGroupEntry(
                             alignment_group_id=group.id,
-                            subcluster_entry_id=s.id,
-                        )
-                        self.session.add(entry)
+                            subcluster_entry_id=s.id
+                        ))
 
-                # Verifica si ya existe un resultado para este grupo
+                # Comprobación si ya hay resultado para este grupo
                 existing_result = (
                     self.session.query(AlignmentResult)
                     .filter_by(alignment_group_id=group.id)
@@ -259,7 +261,7 @@ class StructuralAlignmentManager(QueueTaskInitializer):
                     self.logger.info(f"Alignment result already exists for group {group.id}. Skipping.")
                     continue
 
-                # Insertar el resultado de alineamiento
+                # Insertar nuevo resultado
                 result = AlignmentResult(
                     alignment_group_id=group.id,
                     ce_rms=r.get("ce_rms"),
@@ -271,15 +273,17 @@ class StructuralAlignmentManager(QueueTaskInitializer):
                     fc_identity=r.get("fc_identity"),
                     fc_similarity=r.get("fc_similarity"),
                     fc_score=r.get("fc_score"),
-                    fc_align_len=r.get("fc_align_len"),
+                    fc_align_len=r.get("fc_align_len")
                 )
                 self.session.add(result)
+                inserted += 1
 
             self.session.commit()
-            self.logger.info(f"Stored {len(entry['results'])} alignment results.")
+            self.logger.info(f"Stored {inserted} new alignment results.")
 
         except Exception as e:
             self.session.rollback()
             self.logger.error(f"Error storing alignment results: {e}")
+
 
 
