@@ -1,4 +1,5 @@
 import importlib
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from itertools import combinations
 
 from protein_information_system.sql.model.entities.embedding.structure_3di import Structure3Di
@@ -39,10 +40,13 @@ class StructuralAlignmentManager(QueueTaskInitializer):
             if type_obj.id in self.conf['structural_alignment']['types']
         }
 
+    from concurrent.futures import ThreadPoolExecutor, as_completed
+
     def enqueue(self):
         """
         Enqueue tasks for all pairs of representational subclusters within each cluster.
         Only queries the database without modifications.
+        Uses ThreadPoolExecutor to publish tasks concurrently.
         """
         subclusters = self.session.query(
             SubclusterEntry.id.label("subcluster_entry_id"),
@@ -63,13 +67,32 @@ class StructuralAlignmentManager(QueueTaskInitializer):
         for entry in subclusters:
             clusters_dict.setdefault(entry.cluster_id, []).append(entry)
 
-        # Process each cluster to generate pair combinations
+        task_list = []
+
         for cluster_id, subcluster_entries in clusters_dict.items():
             if len(subcluster_entries) < 2:
                 continue
-            self._enqueue_tasks_for_cluster(cluster_id, subcluster_entries)
+            for subcluster_1, subcluster_2 in combinations(subcluster_entries, 2):
+                if not self._check_if_pair_exists(subcluster_1.subcluster_entry_id, subcluster_2.subcluster_entry_id):
+                    for alignment_type_id in self.conf['structural_alignment']['types']:
+                        task_data = {
+                            'cluster_id': cluster_id,
+                            'subcluster_entry_1_id': subcluster_1.subcluster_entry_id,
+                            'subcluster_entry_2_id': subcluster_2.subcluster_entry_id,
+                            'subcluster_1_file_path': subcluster_1.file_path,
+                            'subcluster_2_file_path': subcluster_2.file_path,
+                            'alignment_type_id': alignment_type_id
+                        }
+                        task_list.append(task_data)
 
-        self.logger.info("All tasks enqueued without modifying the database.")
+        # Publicar en paralelo con threads
+        max_threads = min(32, len(task_list)) or 1  # Evita pasar 0
+        with ThreadPoolExecutor(max_workers=max_threads) as executor:
+            futures = [executor.submit(self.publish_task, task_data) for task_data in task_list]
+            for future in as_completed(futures):
+                _ = future.result()  # Forza ejecución, aunque ignoremos el resultado
+
+        self.logger.info(f"Enqueued {len(task_list)} tasks using threads.")
 
     def _enqueue_tasks_for_cluster(self, cluster_id, subcluster_entries):
         """
